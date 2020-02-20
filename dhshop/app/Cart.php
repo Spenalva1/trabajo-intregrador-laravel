@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ReceiptProduct extends Model
+class Cart extends Model
 {
-    public $table = 'receiptsproducts';
+    public $table = 'carts';
     public $timestamps = false;
     public $guarded = [];
 }
