@@ -27,7 +27,11 @@
                 <td>{{ $Mark->id }}</td>
                 <td>{{ $Mark->name }}</td>
                 <td><a href="editMark/{{ $Mark->id }}" class="btn btn-outline-secondary">modificar</a></td>
-                <td><a href="deleteMark/{{ $Mark->id }}" class="btn btn-outline-secondary">eliminar</a></td>
+                {{-- <td><a href="deleteMark/{{ $Mark->id }}" name="{{$Mark->name}}" class="btn btn-outline-secondary delete">eliminar</a></td> --}}
+                <td><form action="deleteMark/{{ $Mark->id }}" type="marcas" name="{{$Mark->name}}" method="post">
+                    @csrf
+                    <button type="submit" class="btn btn-outline-secondary">Eliminar</button>
+                </form></td>
             </tr>
         @endforeach
 
@@ -38,3 +42,9 @@
 
     <a href="admin" class="btn btn-outline-secondary m-3">Volver a principal</a>
 @endsection
+
+@section('js')
+    <script src="/js/delete.js"></script>
+@endsection
+
+

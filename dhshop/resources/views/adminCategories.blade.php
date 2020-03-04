@@ -27,7 +27,11 @@
                 <td>{{ $Category->id }}</td>
                 <td>{{ $Category->name }}</td>
                 <td><a href="editCategory/{{ $Category->id }}" class="btn btn-outline-secondary">modificar</a></td>
-                <td><a href="deleteCategory/{{ $Category->id }}" class="btn btn-outline-secondary">eliminar</a></td>
+                {{-- <td><a href="deleteCategory/{{ $Category->id }}" class="btn btn-outline-secondary">eliminar</a></td> --}}
+                <td><form action="deleteCategory/{{ $Category->id }}" type="categorías" name="{{$Category->name}}" method="post">
+                    @csrf
+                    <button type="submit" class="btn btn-outline-secondary">Eliminar</button>
+                </form></td>
             </tr>
         @endforeach
 
@@ -37,4 +41,8 @@
     </table>
 
     <a href="/admin" class="btn btn-outline-secondary m-3">Volver a principal</a>
+@endsection
+
+@section('js')
+    <script src="/js/delete.js"></script>
 @endsection

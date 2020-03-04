@@ -39,7 +39,11 @@
                 <td>{{ $Product->mark->name }}</td>
                 <td>{{ $Product->category->name }}</td>
                 <td><a href="editProduct/{{ $Product->id }}" class="btn btn-outline-secondary">modificar</a></td>
-                <td><a href="deleteProduct/{{ $Product->id }}" class="btn btn-outline-secondary">eliminar</a></td>
+                {{-- <td><a href="deleteProduct/{{ $Product->id }}" class="btn btn-outline-secondary">eliminar</a></td> --}}
+                <td><form action="deleteProduct/{{ $Product->id }}" type="productos" name="{{$Product->name}}" method="post">
+                    @csrf
+                    <button type="submit" class="btn btn-outline-secondary">Eliminar</button>
+                </form></td>
             </tr>
         @endforeach
 
@@ -49,4 +53,8 @@
     </table>
 
     <a href="admin" class="btn btn-outline-secondary m-3">Volver a principal</a>
+@endsection
+
+@section('js')
+    <script src="/js/delete.js"></script>
 @endsection

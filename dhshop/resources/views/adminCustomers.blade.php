@@ -34,7 +34,11 @@
                 <td>{{ $Customer->birthdate }}</td>
                 <td>{{ $Customer->phone }}</td>
                 <td>{{ $Customer->address }}</td>
-                <td><a href="deleteCustomer/{{ $Customer->id }}" class="btn btn-outline-secondary">eliminar</a></td>
+                {{-- <td><a href="deleteCustomer/{{ $Customer->id }}" class="btn btn-outline-secondary">eliminar</a></td> --}}
+                <td><form action="deleteCustomer/{{ $Customer->id }}" type="usuarios" name="{{$Customer->first_name}} {{$Customer->last_name}}" method="post">
+                    @csrf
+                    <button type="submit" class="btn btn-outline-secondary">Eliminar</button>
+                </form></td>
             </tr>
 
         @endforeach
@@ -45,4 +49,8 @@
     </table>
 
     <a href="admin" class="btn btn-outline-secondary m-3">Volver a principal</a>
+@endsection
+
+@section('js')
+    <script src="/js/delete.js"></script>
 @endsection
