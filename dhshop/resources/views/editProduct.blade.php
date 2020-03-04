@@ -106,7 +106,7 @@
 
 
 
-        <input class="btn btn-success" type="submit" value="Agregar">
+        <input class="btn btn-success" type="submit" value="Modificar">
         <input class="btn btn-danger" type="button" value="Volver" onclick="location.href='/adminProducts';">
         <br> <br>
     </form>
