@@ -78,7 +78,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $imageName = 'perfil';
+        $imageName = 'perfil.png';
         if(isset($data['image'])){
             $imageName = time() . '.' . $data['image']->getClientOriginalExtension();
             $data['image']->move(public_path('user_img/'), $imageName);
