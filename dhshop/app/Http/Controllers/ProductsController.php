@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Product;
 use App\Category;
 use App\Mark;
+use App\Cart;
 
 class ProductsController extends Controller
 {
@@ -193,6 +194,12 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
+
+        $ProductsAdded = Cart::where('product_id','=', $id)->get();
+        foreach ($ProductsAdded as $ProductAdded) {
+            $ProductAdded->delete(); // Borrar los registros de la tabla cart que contengan a este producto
+        }
+
         $Product = Product::find($id);
         @unlink(public_path('product_img/') . $Product->image);
         $Product->delete();
