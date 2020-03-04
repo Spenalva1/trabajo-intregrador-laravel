@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Category;
+use App\Product;
 
 class CategoriesController extends Controller
 {
@@ -133,6 +134,12 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
+        $Products = Product::where('category_id','=', $id)->get();
+        foreach($Products as $Product){
+            $Product->category_id = -1;
+            $Product->save();
+        }
+
         $Category = Category::find($id);
         $Category->delete();
         return redirect('/adminCategories');

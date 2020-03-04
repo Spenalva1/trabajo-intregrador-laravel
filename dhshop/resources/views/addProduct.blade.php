@@ -51,7 +51,7 @@
 
         Categoría:
         <select name="category_id" class="form-control">
-            <option value="">Seleccione una categoría</option>
+            {{-- <option value="">Seleccione una categoría</option> --}}
             @foreach ($Categories as $Category)
                 @if(old('category_id') == $Category->id)
                     <option value="{{$Category->id}}" selected>{{$Category->name}}</option>
@@ -64,7 +64,7 @@
 
         Marca:
         <select name="mark_id" class="form-control">
-            <option value="">Seleccione una Marca</option>
+            {{-- <option value="-1">Seleccione una Marca</option> --}}
             @foreach ($Marks as $Mark)
                 @if(old('mark_id') == $Mark->id)
                     <option value="{{$Mark->id}}" selected>{{$Mark->name}}</option>
