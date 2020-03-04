@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Customer;
+use App\Cart;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -144,6 +145,13 @@ class CustomersController extends Controller
     public function destroy($id)
     {
         $Customer = Customer::find($id);
+
+        $Cart = Cart::where('user_id','=', $Customer->id)->get();
+        
+        foreach ($Cart as $CartItem) {
+            $CartItem->delete(); // Borrar los productos del carrito
+        }
+
         @unlink(public_path('Customer_img/') . $Customer->image);
         $Customer->delete();
         return redirect('/adminCustomers');
