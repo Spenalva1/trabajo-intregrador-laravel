@@ -90,10 +90,10 @@
             </section>
             <section class="footer-nav">
             <ul>
-                <li><a href="index">Home</a></li>
-                <li><a href="products">Productos</a></li>
-                <li><a href="contact">Contacto</a></li>
-                <li><a href="faq">Ayuda</a></li>
+                <li><a href="/index">Home</a></li>
+                <li><a href="/products">Productos</a></li>
+                <li><a href="/contact">Contacto</a></li>
+                <li><a href="/faq">Ayuda</a></li>
             </ul>
             </section>
         </footer>
