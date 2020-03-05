@@ -15,8 +15,9 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $Categories = Category::all();
-        return view('adminCategories', compact('Categories'));
+        $Categories = Category::all();  //guardo todas las categorias en una variable
+        $Categories->shift();   //quito el registro "sin definir" de la coleccion
+        return view('adminCategories', compact('Categories'));  //retorno la vista de las categorias pasandole la variable anterior
     }
 
     /**

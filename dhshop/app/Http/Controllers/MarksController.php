@@ -15,8 +15,9 @@ class MarksController extends Controller
      */
     public function index()
     {
-        $Marks = Mark::all();
-        return view('adminMarks', compact('Marks'));
+        $Marks = Mark::all(); //guardo todas las marcas en una variable
+        $Marks->shift();    //quito el registro "sin definir"
+        return view('adminMarks', compact('Marks')); //retorno la vista de las marcas pasandole la variable anterior
     }
 
     /**
