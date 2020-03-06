@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 17, 2020 at 08:10 AM
+-- Generation Time: Mar 06, 2020 at 10:55 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -77,6 +77,7 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`) VALUES
+(-1, 'Sin definir'),
 (1, 'Celulares'),
 (2, 'Accesorios'),
 (3, 'Auriculares inalámbricos'),
@@ -101,6 +102,7 @@ CREATE TABLE `marks` (
 --
 
 INSERT INTO `marks` (`id`, `name`) VALUES
+(-1, 'Sin definir'),
 (1, 'Samsung'),
 (2, 'Xiaomi'),
 (3, 'Apple'),
