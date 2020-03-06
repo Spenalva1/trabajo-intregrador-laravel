@@ -31,17 +31,13 @@ Route::get('/faq', function () {
 ########### Marks #############
 Route::get('/adminMarks', 'MarksController@index')->middleware('admin');
 Route::post('/addMark', 'MarksController@store')->middleware('admin');
-Route::get('/editMark/{id}', 'MarksController@edit')->middleware('admin');
 Route::post('/editMark/{id}', 'MarksController@update')->middleware('admin');
 Route::post('/deleteMark/{id}', 'MarksController@destroy')->middleware('admin');
 
 ########### Categories #############
 Route::get('/adminCategories', 'CategoriesController@index')->middleware('admin');
-Route::get('/addCategory', 'CategoriesController@create')->middleware('admin');
 Route::post('/addCategory', 'CategoriesController@store')->middleware('admin');
-Route::get('/editCategory/{id}', 'CategoriesController@edit')->middleware('admin');
 Route::post('/editCategory/{id}', 'CategoriesController@update')->middleware('admin');
-Route::get('/deleteCategory/{id}', 'CategoriesController@delete')->middleware('admin');
 Route::post('/deleteCategory/{id}', 'CategoriesController@destroy')->middleware('admin');
 
 ########### Products #############

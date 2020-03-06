@@ -5,8 +5,8 @@ let editFormContainer = document.getElementById('editFormContainer');
 
 let marks = [];
 document.querySelectorAll('.mark_name').forEach(function(mark_name){
-    marks.push(mark_name.innerHTML);
-}); //si lo cambian desde el inspector se puede esquivar la validacion
+    marks.push(mark_name.innerHTML.toLowerCase());
+}); //me guardo las marcas para validar que una marca ingresada no esté repetida
 
 function freeze(){
     freezeLayer.style.display = 'block';
@@ -16,10 +16,10 @@ function defreeze(){
     freezeLayer.style.display = 'none';
 }
 
-document.querySelectorAll('.btn-delete-confirmation').forEach(function(btn){
+document.querySelectorAll('.btn-delete-confirmation').forEach(function(btn){ //boton para mostrar la confirmacion de eliminacion de una marca
     btn.onclick = function(){
         freeze();
-        deleteFormContainer.style.display = 'block';
+        deleteFormContainer.style.display = 'block'; //muestro la ventana de confirmacion
         let mark_id = this.getAttribute('mark_id');
         let mark_name = this.getAttribute('mark_name');
         let form = document.querySelector('#deleteForm');
@@ -29,7 +29,7 @@ document.querySelectorAll('.btn-delete-confirmation').forEach(function(btn){
     }
 });
 
-document.querySelectorAll('.btn-edit-form').forEach(function(btn){
+document.querySelectorAll('.btn-edit-form').forEach(function(btn){ //boton para mostrar el formulario de modificacion de una marca
     btn.onclick = function(){
         freeze();
         editFormContainer.style.display = 'block';
@@ -42,11 +42,13 @@ document.querySelectorAll('.btn-edit-form').forEach(function(btn){
     }
 });
 
-document.getElementById('btn-add-form').onclick = function(){
+document.getElementById('btn-add-form').onclick = function(){ //boton para mostrar el formulario de alta de una marca
     freeze();
     addFormContainer.style.display = 'block';
 }
 
+
+// botones para cerrar cada una de las ventanas de crud
 document.querySelector('#deleteFormContainer .btn-back').onclick = function(){
     deleteFormContainer.style.display = 'none';
     defreeze();
@@ -61,8 +63,11 @@ document.querySelector('#editFormContainer .btn-back').onclick = function(){
     editFormContainer.style.display = 'none';
     defreeze();
 };
+// -----------------------------------------------
 
-document.getElementById('addForm').onsubmit = function(e){
+
+
+document.getElementById('addForm').onsubmit = function(e){ //validacion de alta de una marca
 
     let value = this.elements[1].value.trim().toLowerCase();
     
@@ -92,7 +97,7 @@ document.getElementById('addForm').onsubmit = function(e){
     this.elements[1].value = value;
 }
 
-document.getElementById('editForm').onsubmit = function(e){
+document.getElementById('editForm').onsubmit = function(e){ //validacion de modificacion de una marca
     let value = this.elements[1].value.trim().toLowerCase();
 
     if(value.length < 2 ){
@@ -115,6 +120,6 @@ document.getElementById('editForm').onsubmit = function(e){
         e.preventDefault();
         return;
     }
-    
+
     this.elements[1].value = value;
 }

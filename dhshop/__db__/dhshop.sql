@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 06, 2020 at 11:08 PM
+-- Generation Time: Mar 06, 2020 at 11:47 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -78,13 +78,13 @@ CREATE TABLE `categories` (
 
 INSERT INTO `categories` (`id`, `name`) VALUES
 (-1, 'Sin definir'),
-(1, 'Celulares'),
-(2, 'Accesorios'),
-(3, 'Auriculares inalámbricos'),
-(4, 'Auriculares con cable'),
-(6, 'Teclados'),
-(7, 'Televisores'),
-(14, 'Consolas');
+(1, 'celulares'),
+(2, 'accesorios'),
+(3, 'auriculares inalámbricos'),
+(4, 'auriculares con cable'),
+(6, 'teclados'),
+(7, 'televisores'),
+(14, 'consolas');
 
 -- --------------------------------------------------------
 
@@ -338,7 +338,7 @@ ALTER TABLE `carts`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `marks`

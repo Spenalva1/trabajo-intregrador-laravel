@@ -8,8 +8,6 @@
 
 @section('main')
     <div id="freezeLayer" style="display: none"></div>
-
-
     <h1>Panel de administración de Marcas</h1>
 
     <a href="admin" class="btn btn-outline-secondary m-3">Volver a principal</a>
@@ -40,7 +38,7 @@
         </tbody>
     </table>
 
-    <a href="admin" class="btn btn-outline-secondary m-3">Volver a principal</a>
+    <a href="/admin" class="btn btn-outline-secondary m-3">Volver a principal</a>
 
 
     {{-- ADD FORM --}}
@@ -125,7 +123,7 @@
 @endsection
 
 @section('js')
-    <script src="/js/delete.js"></script>
+    <script src="/js/marks.js"></script>
 @endsection
 
 
