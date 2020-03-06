@@ -1,14 +1,18 @@
 let freezeLayer = document.getElementById('freezeLayer');
 let deleteFormContainer = document.getElementById('deleteFormContainer');
+let addFormContainer = document.getElementById('addFormContainer');
+
+let marks = [];
+document.querySelectorAll('.mark_name').forEach(function(mark_name){
+    marks.push(mark_name.innerHTML);
+}); //si lo cambian desde el inspector se puede esquivar la validacion
 
 function freeze(){
     freezeLayer.style.display = 'block';
-    disableScroll()
 }
 
 function defreeze(){
     freezeLayer.style.display = 'none';
-    enableScroll()
 }
 
 document.querySelectorAll('.btn-delete-confirmation').forEach(function(btn){
@@ -24,8 +28,43 @@ document.querySelectorAll('.btn-delete-confirmation').forEach(function(btn){
     }
 });
 
-let deleteBack = document.querySelector('#deleteFormContainer #btn-back');
-deleteBack.onclick = function(){
+document.getElementById('btn-add-form').onclick = function(){
+    freeze();
+    addFormContainer.style.display = 'block';
+}
+
+document.querySelector('#deleteFormContainer .btn-back').onclick = function(){
     deleteFormContainer.style.display = 'none';
     defreeze();
 };
+
+document.querySelector('#addFormContainer .btn-back').onclick = function(){
+    addFormContainer.style.display = 'none';
+    defreeze();
+};
+
+document.getElementById('addForm').onsubmit = function(e){
+
+    let value = this.elements[1].value.trim();
+
+    if(value.length < 2){
+        document.getElementById('addErrorsContainer').style.display = 'block';
+        document.getElementById('addError').innerHTML = 'Ingresar un valor de mínimo 2 caracteres.'
+        e.preventDefault();
+        return;
+    }
+
+    if(value.length > 20){
+        document.getElementById('addErrorsContainer').style.display = 'block';
+        document.getElementById('addError').innerHTML = 'Ingresar un valor de máximo 20 caracteres.'
+        e.preventDefault();
+        return;
+    }
+    
+    if(marks.includes(value)){
+        document.getElementById('addErrorsContainer').style.display = 'block';
+        document.getElementById('addError').innerHTML = 'El valor ingresado ya se encuentra registrado.'
+        e.preventDefault();
+        return;
+    }
+}

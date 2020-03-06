@@ -34,7 +34,6 @@ Route::get('/addMark', 'MarksController@create')->middleware('admin');
 Route::post('/addMark', 'MarksController@store')->middleware('admin');
 Route::get('/editMark/{id}', 'MarksController@edit')->middleware('admin');
 Route::post('/editMark/{id}', 'MarksController@update')->middleware('admin');
-Route::get('/deleteMark/{id}', 'MarksController@delete')->middleware('admin');
 Route::post('/deleteMark/{id}', 'MarksController@destroy')->middleware('admin');
 
 ########### Categories #############

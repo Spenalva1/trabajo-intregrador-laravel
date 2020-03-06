@@ -15,40 +15,41 @@
     <a href="admin" class="btn btn-outline-secondary m-3">Volver a principal</a>
 
     <table class="table table-stripped table-bordered table-hover">
-    <thead class="thead-dark">
-        <tr>
-        <th>id</th>
-        <th>Marca</th>
-        <th colspan="2">
-            <a href="addMark" class="btn btn-dark">
-            agregar
-            </a>
-        </th>
-        </tr>
-    </thead>
-    <tbody>
-        
-        @foreach($Marks as $Mark)
-
+        <thead class="thead-dark">
             <tr>
-                <td>{{ $Mark->id }}</td>
-                <td>{{ $Mark->name }}</td>
-                <td><a href="editMark/{{ $Mark->id }}" class="btn btn-outline-secondary">modificar</a></td>
-                <td><button type="submit" mark_id="{{$Mark->id}}" mark_name="{{$Mark->name}}" class="btn btn-outline-secondary btn-delete-confirmation">Eliminar</button></td>
+            <th>id</th>
+            <th>Marca</th>
+            <th colspan="2">
+                <button class="btn btn-dark" id="btn-add-form">agregar</button>
+            </th>
             </tr>
-        @endforeach
+        </thead>
+        <tbody>
+            
+            @foreach($Marks as $Mark)
 
+                <tr>
+                    <td>{{ $Mark->id }}</td>
+                    <td class="mark_name">{{ $Mark->name }}</td>
+                    <td><a href="editMark/{{ $Mark->id }}" class="btn btn-outline-secondary">modificar</a></td>
+                    <td><button mark_id="{{$Mark->id}}" mark_name="{{$Mark->name}}" class="btn btn-outline-secondary btn-delete-confirmation">Eliminar</button></td>
+                </tr>
 
+            @endforeach
 
-    </tbody>
+        </tbody>
     </table>
 
     <a href="admin" class="btn btn-outline-secondary m-3">Volver a principal</a>
 
-    <div class="card crudForm" id="addForm" style="display: none">
+
+    {{-- ADD FORM --}}
+    <div class="card crudForm" id="addFormContainer" style="display: none">
         <h1>Formulario de alta de una marca</h1>
 
-        @if ($errors->any())
+
+        {{-- muestra de errores con validacion de laravel --}}
+        {{-- @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
                     @foreach ($errors->all() as $error)
@@ -56,17 +57,25 @@
                     @endforeach
                 </ul>
             </div>
-        @endif
-        <form action="addMark" method="post">
+        @endif --}} 
+
+        <div class="alert alert-danger" id="addErrorsContainer" style="display: none">
+            <span id="addError"></span>
+        </div>
+
+
+
+        <form action="/addMark" id="addForm" method="post">
             @csrf
             Marca:
             <br>
             <input type="text" name="name" class="form-control" value="{{old('name')}}">
             <br>
-            <input class="btn btn-success" type="submit" value="Agregar">
-            <input class="btn btn-danger" type="button" value="Volver" onclick="location.href='/adminMarks';">
+            <input class="btn btn-success" id="btn-add" type="submit" value="Agregar">
+            <button class="btn btn-danger btn-back" type="button">Volver</button>
         </form>
     </div>
+    {{-- ----------------- --}}
 
 
     {{-- DELETE CONFIRMATION --}}
@@ -77,16 +86,16 @@
             <span id="deleteSpan"></span> <br>
             <br>
             <input class="btn btn-success" id="btn-delete" type="submit" value="Eliminar">
-            <button class="btn btn-danger" id="btn-back" type="button">Volver</button>
+            <button class="btn btn-danger btn-back" type="button">Volver</button>
         </form>
     </div>
+    {{-- ----------------- --}}
+
 
 @endsection
 
 @section('js')
     <script src="/js/delete.js"></script>
-    <script src="/js/disableScroll.js"></script>
-
 @endsection
 
 
