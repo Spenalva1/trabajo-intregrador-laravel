@@ -64,7 +64,9 @@ document.querySelector('#editFormContainer .btn-back').onclick = function(){
 
 document.getElementById('addForm').onsubmit = function(e){
 
-    let value = this.elements[1].value.trim();
+    let value = this.elements[1].value.trim().toLowerCase();
+    
+    
 
     if(value.length < 2){
         document.getElementById('addErrorsContainer').style.display = 'block';
@@ -86,10 +88,12 @@ document.getElementById('addForm').onsubmit = function(e){
         e.preventDefault();
         return;
     }
+
+    this.elements[1].value = value;
 }
 
 document.getElementById('editForm').onsubmit = function(e){
-    let value = this.elements[1].value.trim();
+    let value = this.elements[1].value.trim().toLowerCase();
 
     if(value.length < 2 ){
         document.getElementById('editErrorsContainer').style.display = 'block';
@@ -111,4 +115,6 @@ document.getElementById('editForm').onsubmit = function(e){
         e.preventDefault();
         return;
     }
+    
+    this.elements[1].value = value;
 }

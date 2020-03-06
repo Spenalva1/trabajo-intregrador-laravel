@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 06, 2020 at 10:55 PM
+-- Generation Time: Mar 06, 2020 at 11:08 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -103,15 +103,15 @@ CREATE TABLE `marks` (
 
 INSERT INTO `marks` (`id`, `name`) VALUES
 (-1, 'Sin definir'),
-(1, 'Samsung'),
-(2, 'Xiaomi'),
-(3, 'Apple'),
-(4, 'Huawei'),
-(5, 'Motorola'),
-(6, 'Sony'),
-(7, 'Fiio'),
-(10, 'Lenovo'),
-(16, 'Kz');
+(1, 'samsung'),
+(2, 'xiaomi'),
+(3, 'apple'),
+(4, 'huawei'),
+(5, 'motorola'),
+(6, 'sony'),
+(7, 'fiio'),
+(10, 'lenovo'),
+(16, 'kz');
 
 -- --------------------------------------------------------
 
@@ -344,7 +344,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `marks`
 --
 ALTER TABLE `marks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `migrations`

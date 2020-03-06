@@ -30,7 +30,7 @@
 
                 <tr>
                     <td>{{ $Mark->id }}</td>
-                    <td class="mark_name">{{ $Mark->name }}</td>
+                    <td class="mark_name">{{ ucfirst(trans($Mark->name)) }}</td>
                     <td><button mark_id="{{$Mark->id}}" mark_name="{{$Mark->name}}" class="btn btn-outline-secondary btn-edit-form">modificar</button></td>
                     <td><button mark_id="{{$Mark->id}}" mark_name="{{$Mark->name}}" class="btn btn-outline-secondary btn-delete-confirmation">Eliminar</button></td>
                 </tr>
@@ -66,7 +66,7 @@
             @csrf
             Marca:
             <br>
-            <input type="text" name="name" class="form-control" value="{{old('name')}}">
+            <input type="text" name="name" class="form-control">
             <br>
             <input class="btn btn-success" id="btn-add" type="submit" value="Agregar">
             <button class="btn btn-danger btn-back" type="button">Volver</button>
@@ -113,7 +113,6 @@
             @csrf
             Marca:
             <br>
-            {{-- <input type="text" name="name" class="form-control" value="{{old('name', $Mark->name)}}">   CON VALIDACION DE LARAVEL--}}
             <input type="text" name="name" class="form-control" value="">
             <br>
             <input class="btn btn-success" id="btn-edit" type="submit" value="Modificar">
