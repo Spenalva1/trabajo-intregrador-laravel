@@ -46,7 +46,7 @@ class MarksController extends Controller
             [
                 'required' => 'Completar campo',
                 'unique' => 'El Nombre ya se encuentra en la base de datos',
-                'min' => 'debe ingresar más de 2 letras',
+                'min' => 'debe ingresar más de 1 letras',
                 'max' => 'debe ingresar menos de 20 letras'
             ]
         );
