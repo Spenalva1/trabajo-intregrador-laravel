@@ -53,7 +53,6 @@ Route::post('/deleteProduct/{id}', 'ProductsController@destroy')->middleware('ad
 Route::get('/profile', 'CustomersController@show');
 Route::post('/profile', 'CustomersController@update');
 Route::get('/adminCustomers', 'CustomersController@index')->middleware('admin');
-Route::get('/deleteCustomer/{id}', 'CustomersController@delete')->middleware('admin');
 Route::post('/deleteCustomer/{id}', 'CustomersController@destroy')->middleware('admin');
 
 ########### Carts #############

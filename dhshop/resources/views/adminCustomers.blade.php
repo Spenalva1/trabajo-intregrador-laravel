@@ -2,7 +2,12 @@
 
 @section('title', 'DHShop - adminCustomers')
 
+@section('css')
+    {{ '/css/crud.css' }}
+@endsection
+
 @section('main')
+    <div id="freezeLayer" style="display: none"></div>
     <h1>Panel de administración de clientes</h1>
 
     <a href="admin" class="btn btn-outline-secondary m-3">Volver a principal</a>
@@ -34,11 +39,7 @@
                 <td>{{ $Customer->birthdate }}</td>
                 <td>{{ $Customer->phone }}</td>
                 <td>{{ $Customer->address }}</td>
-                {{-- <td><a href="deleteCustomer/{{ $Customer->id }}" class="btn btn-outline-secondary">eliminar</a></td> --}}
-                <td><form action="deleteCustomer/{{ $Customer->id }}" type="usuarios" name="{{$Customer->first_name}} {{$Customer->last_name}}" method="post">
-                    @csrf
-                    <button type="submit" class="btn btn-outline-secondary">Eliminar</button>
-                </form></td>
+                <td><button user_id="{{$Customer->id}}" user_name="{{$Customer->first_name}} {{$Customer->last_name}}" class="btn btn-outline-secondary btn-delete-confirmation">Eliminar</button></td>
             </tr>
 
         @endforeach
@@ -49,8 +50,21 @@
     </table>
 
     <a href="admin" class="btn btn-outline-secondary m-3">Volver a principal</a>
+
+    {{-- DELETE CONFIRMATION --}}
+    <div class="card crudForm" id="deleteFormContainer" style="display:none">
+        <h2>Eliminar marca</h2>
+        <form id="deleteForm"  method="post">
+            @csrf
+            <span id="deleteSpan"></span> <br>
+            <br>
+            <input class="btn btn-success" id="btn-delete" type="submit" value="Eliminar">
+            <button class="btn btn-danger btn-back" type="button">Volver</button>
+        </form>
+    </div>
+    {{-- ----------------- --}}
 @endsection
 
 @section('js')
-    <script src="/js/delete.js"></script>
+    <script src="/js/users.js"></script>
 @endsection
