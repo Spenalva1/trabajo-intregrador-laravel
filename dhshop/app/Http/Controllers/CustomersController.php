@@ -51,7 +51,7 @@ class CustomersController extends Controller
     public function show()
     {
         $User = Auth::user();
-        if($User == null){
+        if ($User == null) {
             return redirect('/login');
         }
         return view('/profile', compact('User'));
@@ -80,17 +80,17 @@ class CustomersController extends Controller
         $Customer = Customer::find($request['id']);
 
         $newPass = "";
-        if(strlen($request['password']) > 0){
+        if (strlen($request['password']) > 0) {
             $newPass = 'required|string|min:8|confirmed';
         }
 
         $this->validate($request, [
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,'.$Customer->id,
+            'email' => 'required|string|email|max:255|unique:users,email,' . $Customer->id,
             'password' => $newPass,
-            'image' => 'mimes:jpg,jpeg,png,svg,gif', 
-            'dni' => 'required|numeric|unique:users,dni,'.$Customer->id,
+            'image' => 'mimes:jpg,jpeg,png,svg,gif',
+            'dni' => 'required|numeric|unique:users,dni,' . $Customer->id,
             'birthdate' => 'required|before:18 years ago',
             'phone' => 'required|numeric',
             'address' => 'required|string'
@@ -101,9 +101,9 @@ class CustomersController extends Controller
             'dni.unique' => 'Ya existe un usuario con el dni ingresado',
             'mimes' => 'Tiene que ser un archivo con una de las siguientes extensiones: .jpg, .png, .gif, .svg',
             'before' => 'Tienes que ser mayor a 18 años'
-        ]); 
+        ]);
 
-        if(isset($request['image'])){
+        if (isset($request['image'])) {
             @unlink(public_path('user_img/') . $Customer->image);
             $imageName = time() . '.' . $request['image']->getClientOriginalExtension();
             $request['image']->move(public_path('user_img/'), $imageName);
@@ -133,7 +133,7 @@ class CustomersController extends Controller
     public function delete($id)
     {
         $Customer = Customer::find($id);
-        return view('deleteCustomer', compact('Customer')); 
+        return view('deleteCustomer', compact('Customer'));
     }
 
     /**
@@ -146,8 +146,8 @@ class CustomersController extends Controller
     {
         $Customer = Customer::find($id);
 
-        $Cart = Cart::where('user_id','=', $Customer->id)->get();
-        
+        $Cart = Cart::where('user_id', '=', $Customer->id)->get();
+
         foreach ($Cart as $CartItem) {
             $CartItem->delete(); // Borrar los productos del carrito
         }
@@ -155,5 +155,35 @@ class CustomersController extends Controller
         @unlink(public_path('Customer_img/') . $Customer->image);
         $Customer->delete();
         return redirect('/adminCustomers');
+    }
+
+    public function resetPasswordForm(Request $request)
+    {
+        return view('auth/resetPassword');
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $this->validate($request, [
+            'email' => 'required'
+        ], [
+            'required' => 'Completar campo'
+        ]);
+
+        $User = Customer::where('email', '=', $request["email"])->get();
+
+        if ($User->isEmpty()) {
+            return redirect('/resetPassword')->withErrors('El mail ingresado no se encuentra registrado.');
+        }
+
+        $newPass = substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(15 / strlen($x)))), 1, 15);
+        $hash = password_hash($newPass, PASSWORD_DEFAULT);
+
+
+        $User[0]->password = $hash;
+
+        $User[0]->save();
+        
+        return view('auth/resetedPassword', compact('newPass'));
     }
 }

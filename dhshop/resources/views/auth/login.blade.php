@@ -19,7 +19,7 @@
             <div class="container-fluid">
                 <div class="main-content mt-3">
                     <h1 id="title-page">Ingresar</h1>
-                    <a href="index.php"><img src="img/logo-dh.PNG" alt=""></a>
+                    <a href="/"><img src="img/logo-dh.PNG" alt=""></a>
                     <form method="post" action="">
                         @csrf
                         <div class="form-group">
@@ -51,7 +51,7 @@
                     </form>
                     <a href="/register" style="width:51%" class="btn btn-danger">Crear cuenta</a>
 
-                    <p>¿Olvidaste la contraseña? <a href="/password/reset">Haz click aquí</a></p>
+                    <p>¿Olvidaste la contraseña? <a href="resetPassword">Haz click aquí</a></p>
                 </div>
             </div>
         </section>

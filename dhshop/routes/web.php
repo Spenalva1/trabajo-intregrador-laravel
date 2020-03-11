@@ -52,6 +52,8 @@ Route::post('/deleteProduct/{id}', 'ProductsController@destroy')->middleware('ad
 ########### Customers #############
 Route::get('/profile', 'CustomersController@show');
 Route::post('/profile', 'CustomersController@update');
+Route::get('/resetPassword', 'CustomersController@resetPasswordForm');
+Route::post('/resetPassword', 'CustomersController@resetPassword');
 Route::get('/adminCustomers', 'CustomersController@index')->middleware('admin');
 Route::post('/deleteCustomer/{id}', 'CustomersController@destroy')->middleware('admin');
 
