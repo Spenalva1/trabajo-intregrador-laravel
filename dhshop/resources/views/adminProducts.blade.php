@@ -40,8 +40,8 @@
                 <td>{{ $Product->stock }}</td>
                 <td>{{ $Product->description }}</td>
                 <td><img class="img-fluid img-thumbnail main-image" src="product_img/{{$Product->image}}" alt=""></td>
-                <td>{{ $Product->mark->name }}</td>
-                <td>{{ $Product->category->name }}</td>
+                <td>{{ ucfirst(trans($Product->mark->name)) }}</td>
+                <td>{{ ucfirst(trans($Product->category->name)) }}</td>
                 <td><a href="editProduct/{{ $Product->id }}" class="btn btn-outline-secondary">modificar</a></td>
                 {{-- <td><a href="deleteProduct/{{ $Product->id }}" class="btn btn-outline-secondary">eliminar</a></td> --}}
                 {{-- <td><form action="deleteProduct/{{ $Product->id }}" type="productos" name="{{$Product->name}}" method="post">

@@ -54,6 +54,8 @@
 
 <section class="product-description">
   <h3>Descripcion</h3>
+  Marca: {{ucfirst(trans($Product->mark->name))}} <br>
+  Categoria: {{ucfirst(trans($Product->category->name))}} <br>
   <p>{{$Product->description}}</p>
 </section>
 
