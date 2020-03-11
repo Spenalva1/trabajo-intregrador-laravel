@@ -7,6 +7,8 @@ use App\Product;
 use App\Category;
 use App\Mark;
 use App\Cart;
+use App\Receipt;
+use App\ReceiptProduct;
 
 class ProductsController extends Controller
 {
@@ -188,6 +190,20 @@ class ProductsController extends Controller
         $ProductsAdded = Cart::where('product_id','=', $id)->get();
         foreach ($ProductsAdded as $ProductAdded) {
             $ProductAdded->delete(); // Borrar los registros de la tabla cart que contengan a este producto
+        }
+
+        $ProductsBought = ReceiptProduct::where('product_id','=', $id)->get();
+        foreach ($ProductsBought as $ProductBought) {
+
+            $receipt = Receipt::where('id', '=', $ProductBought->receipt_id)->get();
+
+            $ProductBought->delete(); // Borrar los registros de la tabla receiptsproducts que contengan a este producto
+            
+            if(!$receipt->isEmpty()){
+                $receipt[0]->delete();
+            }
+
+
         }
 
         $Product = Product::find($id);
