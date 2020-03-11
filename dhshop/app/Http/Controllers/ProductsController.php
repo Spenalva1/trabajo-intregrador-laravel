@@ -198,9 +198,9 @@ class ProductsController extends Controller
             $receipt = Receipt::where('id', '=', $ProductBought->receipt_id)->get();
 
             $ProductBought->delete(); // Borrar los registros de la tabla receiptsproducts que contengan a este producto
-            
+
             if(!$receipt->isEmpty()){
-                $receipt[0]->delete();
+                $receipt[0]->delete(); // Borrar los registros de la tabla receipts que contengan a este producto
             }
 
 

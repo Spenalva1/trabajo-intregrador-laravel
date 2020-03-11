@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Customer;
 use App\Cart;
+use App\Receipt;
+use App\ReceiptProduct;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -150,6 +152,22 @@ class CustomersController extends Controller
 
         foreach ($Cart as $CartItem) {
             $CartItem->delete(); // Borrar los productos del carrito
+        }
+
+
+        $receipts = Receipt::where('user_id','=', $id)->get();
+        foreach ($receipts as $receipt) {
+
+            $productsBought = ReceiptProduct::where('receipt_id', '=', $receipt->id)->get();
+
+            
+            if(!$productsBought->isEmpty()){
+                foreach($productsBought as $productBought){
+                    $productBought->delete(); // Borrar los registros de la tabla receiptsproducts que contengan a este cliente
+                }
+            }
+            
+            $receipt->delete(); // Borrar los registros de la tabla receipts que contengan a este cliente
         }
 
         @unlink(public_path('Customer_img/') . $Customer->image);
