@@ -17,8 +17,10 @@ class ProductsController extends Controller
      */
     public function index()
     {
+        $Marks = Mark::all();
+        $Categories = Category::all();
         $Products = Product::all();
-        return view('adminProducts', compact('Products'));
+        return view('adminProducts', compact('Products', 'Marks', 'Categories'));
     }
 
     /**
@@ -172,18 +174,6 @@ class ProductsController extends Controller
         $Product->save();
 
         return redirect('adminProducts');
-    }
-
-    /**
-     * Show the confirmation form for destroying the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function delete($id)
-    {
-        $Product = Product::find($id);
-        return view('deleteProduct', compact('Product')); 
     }
 
     /**

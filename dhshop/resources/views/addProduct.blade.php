@@ -1,12 +1,8 @@
-@extends('layouts.template')
+<div class="card crudForm overflow-auto" id="addFormContainer" style="display: none">
 
-@section('title', 'DHShop - adminProducts')
+    <h2>Formulario de alta de un producto</h2>
 
-@section('main')
-<br><br>
-    <h1>Formulario de alta de un producto</h1>
-
-    @if ($errors->any())
+    {{-- @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
                 @foreach ($errors->all() as $error)
@@ -14,44 +10,47 @@
                 @endforeach
             </ul>
         </div>
-    @endif
+    @endif --}}
 
 
-    <form action="" method="post" enctype="multipart/form-data">
+    <form id="addForm" action="/addProduct" method="post" enctype="multipart/form-data">
         @csrf
         Nombre:
-        <input value="{{old('name')}}" class="form-control" type="text" name="name" class="form-control" require>
-        {{-- <div class='invalid-feedback' style='display: block'></div> --}}
+        <input value="" class="form-control" type="text" name="name" class="form-control" require>
+        <div class='invalid-feedback error' id="nameError" style='display: block'></div>
         <br>
 
 
         Precio:
-        <input value="{{old('price')}}" type="text" name="price" class="form-control" require>
+        <input value="0" type="number" name="price" class="form-control" require>
+        <div class='invalid-feedback error' id="priceError" style='display: block'></div>
         <br>
 
 
 
         Stock:
-        <input value="{{old('stock')}}" type="number" name="stock" class="form-control" require>
+        <input value="0" type="number" name="stock" class="form-control" require>
+        <div class='invalid-feedback error' id="stockError" style='display: block'></div>
         <br>
 
 
 
         Descripción:
-        <input value="{{old('description')}}" type="textarea" name="description" class="form-control" require>
+        <textarea cols="30" rows="3" value="{{old('description')}}" type="textarea" name="description" class="form-control" require></textarea>
+        <div class='invalid-feedback error' id="descriptionError" style='display: block'></div>
         <br>
 
 
 
         Imagen:
-        <input class="from-control" type="file" name="image" require>
+        <input class="from-control" type="file" id="image" name="image" require>
+        <div class='invalid-feedback error' id="imageError" style='display: block'></div>
         <br> <br>
 
 
 
         Categoría:
         <select name="category_id" class="form-control">
-            {{-- <option value="">Seleccione una categoría</option> --}}
             @foreach ($Categories as $Category)
                 @if(old('category_id') == $Category->id)
                     <option value="{{$Category->id}}" selected>{{$Category->name}}</option>
@@ -64,7 +63,6 @@
 
         Marca:
         <select name="mark_id" class="form-control">
-            {{-- <option value="-1">Seleccione una Marca</option> --}}
             @foreach ($Marks as $Mark)
                 @if(old('mark_id') == $Mark->id)
                     <option value="{{$Mark->id}}" selected>{{$Mark->name}}</option>
@@ -81,8 +79,7 @@
 
 
         <input class="btn btn-success" type="submit" value="Agregar">
-        <input class="btn btn-danger" type="button" value="Volver" onclick="location.href='/adminProducts';">
+        <button class="btn btn-danger btn-back" type="button">Volver</button>
         <br> <br>
     </form>
-
-@endsection
+</div>

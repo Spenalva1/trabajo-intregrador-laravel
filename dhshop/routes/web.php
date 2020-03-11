@@ -44,11 +44,9 @@ Route::post('/deleteCategory/{id}', 'CategoriesController@destroy')->middleware(
 Route::get('/products', 'ProductsController@list');
 Route::get('/products/{id}', 'ProductsController@show');
 Route::get('/adminProducts', 'ProductsController@index')->middleware('admin');
-Route::get('/addProduct', 'ProductsController@create')->middleware('admin');
 Route::post('/addProduct', 'ProductsController@store')->middleware('admin');
 Route::get('/editProduct/{id}', 'ProductsController@edit')->middleware('admin');
 Route::post('/editProduct/{id}', 'ProductsController@update')->middleware('admin');
-Route::get('/deleteProduct/{id}', 'ProductsController@delete')->middleware('admin');
 Route::post('/deleteProduct/{id}', 'ProductsController@destroy')->middleware('admin');
 
 ########### Customers #############

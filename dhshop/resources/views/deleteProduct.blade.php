@@ -1,16 +1,9 @@
-@extends('layouts.template')
-
-@section('title', 'DHShop - adminProducts')
-
-@section('main')
-
-<br>
-<h1>Eliminar producto</h1>
-<form action="" method="POST">
-    @csrf
-    ¿Seguro desea eliminar el siguiente producto: {{$Product->name}} ? <br>
-    <input class="btn btn-success" type="submit" value="Eliminar">
-    <a class="btn btn-danger" type="button" href='/adminProducts'>Volver</a>
-</form>
-
-@endsection
+<div class="card crudForm" id="deleteFormContainer" style="display: none">
+    <h2>Eliminar producto</h2>
+    <form id="deleteForm" method="POST">
+        <span id="deleteSpan"></span> <br>
+        @csrf
+        <input class="btn btn-success" type="submit" value="Eliminar">
+        <button class="btn btn-danger btn-back" type="button">Volver</button>
+    </form>
+</div>

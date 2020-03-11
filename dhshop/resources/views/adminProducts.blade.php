@@ -2,8 +2,14 @@
 
 @section('title', 'DHShop - adminProducts')
 
+@section('css')
+    {{ '/css/crud.css' }}
+@endsection
+
 @section('main')
     <h1>Panel de administración de productos</h1>
+
+    <div id="freezeLayer" style="display: none"></div>
 
     <a href="admin" class="btn btn-outline-secondary m-3">Volver a principal</a>
 
@@ -19,9 +25,7 @@
                 <th>Marca</th>
                 <th>Categoría</th>
                 <th colspan="2">
-                <a href="addProduct" class="btn btn-dark">
-                    agregar
-                </a>
+                    <button class="btn btn-dark" id="btn-add-form">agregar</button>
                 </th>
             </tr>
         </thead>
@@ -31,7 +35,7 @@
 
             <tr>
                 <td>{{ $Product->id }}</td>
-                <td>{{ $Product->name }}</td>
+                <td class="product_name">{{ $Product->name }}</td>
                 <td>${{ $Product->price }}</td>
                 <td>{{ $Product->stock }}</td>
                 <td>{{ $Product->description }}</td>
@@ -40,10 +44,11 @@
                 <td>{{ $Product->category->name }}</td>
                 <td><a href="editProduct/{{ $Product->id }}" class="btn btn-outline-secondary">modificar</a></td>
                 {{-- <td><a href="deleteProduct/{{ $Product->id }}" class="btn btn-outline-secondary">eliminar</a></td> --}}
-                <td><form action="deleteProduct/{{ $Product->id }}" type="productos" name="{{$Product->name}}" method="post">
+                {{-- <td><form action="deleteProduct/{{ $Product->id }}" type="productos" name="{{$Product->name}}" method="post">
                     @csrf
                     <button type="submit" class="btn btn-outline-secondary">Eliminar</button>
-                </form></td>
+                </form></td> --}}
+                <td><button product_id="{{$Product->id}}" product_name="{{$Product->name}}" class="btn btn-outline-secondary btn-delete-confirmation">Eliminar</button></td>
             </tr>
         @endforeach
 
@@ -53,8 +58,14 @@
     </table>
 
     <a href="admin" class="btn btn-outline-secondary m-3">Volver a principal</a>
+
+
+
+    @extends('addProduct')
+    @extends('deleteProduct')
+
 @endsection
 
 @section('js')
-    <script src="/js/delete.js"></script>
+    <script src="/js/products.js"></script>
 @endsection
