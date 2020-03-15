@@ -8,11 +8,11 @@ document.querySelectorAll('.category_name').forEach(function(mark_name){
     categories.push(mark_name.innerHTML.toLowerCase());
 }); //me guardo las categorias para validar que una categoria ingresada no esté repetida
 
-function freeze(){
+function freeze(){ //evito que el usuario interactue al abrir un div de crud
     freezeLayer.style.display = 'block';
 }
 
-function defreeze(){
+function defreeze(){ //permito que el usuario interactue al cerrar el div de crud
     freezeLayer.style.display = 'none';
 }
 
@@ -24,7 +24,7 @@ document.querySelectorAll('.btn-delete-confirmation').forEach(function(btn){ //b
         let category_name = this.getAttribute('category_name');
         let form = document.querySelector('#deleteForm');
         let span = document.querySelector('#deleteSpan');
-        form.setAttribute('action', 'deleteCategory/' + category_id);
+        form.setAttribute('action', 'deleteCategory/' + category_id); //setteo el atributo "action" para que lance la peticion de eliminar categoria
         span.innerHTML = '¿Seguro desea eliminar la siguiente categoria: ' + category_name + '?';        
     }
 });
@@ -37,7 +37,7 @@ document.querySelectorAll('.btn-edit-form').forEach(function(btn){ //boton para 
         let category_name = this.getAttribute('category_name');
         let form = document.querySelector('#editForm');
         form.setAttribute('action', 'editCategory/' + category_id);
-        form.setAttribute('old', category_name);
+        form.setAttribute('old', category_name); // me guardo el valor de la categoria que sera modificada
         form.elements[1].value = category_name;
     }
 });

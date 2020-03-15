@@ -24,27 +24,6 @@ class CustomersController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -53,21 +32,10 @@ class CustomersController extends Controller
     public function show()
     {
         $User = Auth::user();
-        if ($User == null) {
+        if ($User == null) { //verifico que haya un usuario logeado
             return redirect('/login');
         }
         return view('/profile', compact('User'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -81,9 +49,10 @@ class CustomersController extends Controller
     {
         $Customer = Customer::find($request['id']);
 
+        //en el caso de que no se ingrese una contraseña nueva, este campo no se validará
         $newPass = "";
         if (strlen($request['password']) > 0) {
-            $newPass = 'required|string|min:8|confirmed';
+            $newPass = 'string|min:8|confirmed';
         }
 
         $this->validate($request, [
@@ -127,18 +96,6 @@ class CustomersController extends Controller
     }
 
     /**
-     * Show the confirmation form for destroying the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function delete($id)
-    {
-        $Customer = Customer::find($id);
-        return view('deleteCustomer', compact('Customer'));
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -148,8 +105,8 @@ class CustomersController extends Controller
     {
         $Customer = Customer::find($id);
 
-        $Cart = Cart::where('user_id', '=', $Customer->id)->get();
 
+        $Cart = Cart::where('user_id', '=', $Customer->id)->get();
         foreach ($Cart as $CartItem) {
             $CartItem->delete(); // Borrar los productos del carrito
         }
@@ -157,16 +114,12 @@ class CustomersController extends Controller
 
         $receipts = Receipt::where('user_id','=', $id)->get();
         foreach ($receipts as $receipt) {
-
             $productsBought = ReceiptProduct::where('receipt_id', '=', $receipt->id)->get();
-
-            
             if(!$productsBought->isEmpty()){
                 foreach($productsBought as $productBought){
                     $productBought->delete(); // Borrar los registros de la tabla receiptsproducts que contengan a este cliente
                 }
             }
-            
             $receipt->delete(); // Borrar los registros de la tabla receipts que contengan a este cliente
         }
 
@@ -188,12 +141,13 @@ class CustomersController extends Controller
             'required' => 'Completar campo'
         ]);
 
-        $User = Customer::where('email', '=', $request["email"])->get();
+        $User = Customer::where('email', '=', $request["email"])->get(); //obtengo el email cuya contraseña se desea resetear
 
-        if ($User->isEmpty()) {
+        if ($User->isEmpty()) { //verifico que el email ingresado exista
             return redirect('/resetPassword')->withErrors('El mail ingresado no se encuentra registrado.');
         }
 
+        // genero una contraseña aleatoria
         $newPass = substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(15 / strlen($x)))), 1, 15);
         $hash = password_hash($newPass, PASSWORD_DEFAULT);
 

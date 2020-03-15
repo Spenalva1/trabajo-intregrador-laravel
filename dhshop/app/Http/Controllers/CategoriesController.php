@@ -21,16 +21,6 @@ class CategoriesController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('addCategory');
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -58,30 +48,6 @@ class CategoriesController extends Controller
         $Category->save();
 
         return redirect('adminCategories');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $Category = Category::find($id);
-         // return view('', compact('Category')); 
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $Category = Category::find($id);
-        return view('editCategory', compact('Category')); 
     }
 
     /**
@@ -115,18 +81,6 @@ class CategoriesController extends Controller
         return redirect('adminCategories');
     }
 
-     /**
-     * Show the confirmation form for destroying the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function delete($id)
-    {
-        $Category = Category::find($id);
-        return view('deleteCategory', compact('Category')); 
-    }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -135,7 +89,8 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        $Products = Product::where('category_id','=', $id)->get();
+        //en el caso de que haya productos de esta categoria, modifico su campo de categoria a "sin definir"
+        $Products = Product::where('category_id','=', $id)->get(); //obtengo los productos que pertenezcan a la categoria que sera eliminada
         foreach($Products as $Product){
             $Product->category_id = -1;
             $Product->save();

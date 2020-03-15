@@ -33,11 +33,4 @@ class AdminsController extends Controller
         session_destroy();
         return redirect('/');
     }
-
-    public function check(){
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
-        dd($_SESSION);
-    }
 }

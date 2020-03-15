@@ -43,11 +43,6 @@
                 <td>{{ ucfirst(trans($Product->mark->name)) }}</td>
                 <td>{{ ucfirst(trans($Product->category->name)) }}</td>
                 <td><a href="editProduct/{{ $Product->id }}" class="btn btn-outline-secondary">modificar</a></td>
-                {{-- <td><a href="deleteProduct/{{ $Product->id }}" class="btn btn-outline-secondary">eliminar</a></td> --}}
-                {{-- <td><form action="deleteProduct/{{ $Product->id }}" type="productos" name="{{$Product->name}}" method="post">
-                    @csrf
-                    <button type="submit" class="btn btn-outline-secondary">Eliminar</button>
-                </form></td> --}}
                 <td><button product_id="{{$Product->id}}" product_name="{{$Product->name}}" class="btn btn-outline-secondary btn-delete-confirmation">Eliminar</button></td>
             </tr>
         @endforeach

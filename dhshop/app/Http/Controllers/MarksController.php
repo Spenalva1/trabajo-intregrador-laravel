@@ -21,16 +21,6 @@ class MarksController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('addMark');
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -58,30 +48,6 @@ class MarksController extends Controller
         $Mark->save();
 
         return redirect('adminMarks');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $Mark = Mark::find($id);
-         // return view('', compact('Mark')); 
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $Mark = Mark::find($id);
-        return view('editMark', compact('Mark')); 
     }
 
     /**
@@ -114,19 +80,6 @@ class MarksController extends Controller
 
         return redirect('adminMarks');
     }
-
-    /**
-     * Show the confirmation form for destroying the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function delete($id)
-    {
-        $Mark = Mark::find($id);
-        return view('deleteMark', compact('Mark')); 
-    }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -135,7 +88,8 @@ class MarksController extends Controller
      */
     public function destroy($id)
     {
-        $Products = Product::where('mark_id','=', $id)->get();
+        //en el caso de que haya productos de esta marca, modifico su campo de marca a "sin definir"
+        $Products = Product::where('mark_id','=', $id)->get(); //obtengo los productos que pertenezcan a la marca que sera eliminada
         foreach($Products as $Product){
             $Product->mark_id = -1;
             $Product->save();
