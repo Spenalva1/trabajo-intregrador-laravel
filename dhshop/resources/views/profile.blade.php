@@ -132,6 +132,7 @@
     <div class="col-12 col-md-4 imgAndHistory-container">
         <img class="img-fluid img-thumbnail" id="profileimg" src="user_img/{{$User->image}}" alt="">
         <br>
+        <a href="/purchases">Ver historial de compras</a><br>
         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
             Cerrar sesión
         </a>
