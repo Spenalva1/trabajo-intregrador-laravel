@@ -74,6 +74,7 @@ class CartsController extends Controller
 
     public function checkout(Request $request){
         $Products = Auth::user()->cart;
+        $totalPrice = 0;
         
         foreach ($Products as $Product) {
             if($Product->pivot->quantity > $Product->stock){  // Me fijo que todavia haya el stock deseado por el usuario ya que 
@@ -88,8 +89,10 @@ class CartsController extends Controller
         $Receipt = new Receipt;
         date_default_timezone_set("America/Argentina/Buenos_Aires");
         $Receipt->user_id = Auth::user()->id;
-        $Receipt->date = date("Y-m-d H:i:s");
+        $date = date("Y-m-d H:i:s");
+        $Receipt->date = $date;
         $Receipt->save();  // creo el recibo y lo guardo en la base de datos
+        $purchaseNumber = $Receipt->id; //me guardo el numero de compra (id de receipt)
 
 
         foreach ($Products as $Product) {
@@ -100,6 +103,7 @@ class CartsController extends Controller
             $ReceiptProduct->save(); // se registran los productos de la compra
             $Product->stock -= $Product->pivot->quantity; //se actualiza el stock del producto
             $Product->save(); //se actualiza el stock del producto
+            $totalPrice += $Product->price * $Product->pivot->quantity; //calculo el precio total de los productos en el carrito
         }
 
 
@@ -109,6 +113,6 @@ class CartsController extends Controller
             $CartItem->delete(); // Borrar los productos del carrito
         }
 
-        return redirect('/');
+        return view('/checkOut', compact('Products', 'purchaseNumber', 'totalPrice', 'date'));
     }
 }
