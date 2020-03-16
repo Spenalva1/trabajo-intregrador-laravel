@@ -43,6 +43,7 @@ Route::post('/deleteCategory/{id}', 'CategoriesController@destroy')->middleware(
 ########### Products #############
 Route::get('/products', 'ProductsController@list');
 Route::get('/products/{id}', 'ProductsController@show');
+Route::post('/productsSearch', 'ProductsController@search');
 Route::get('/adminProducts', 'ProductsController@index')->middleware('admin');
 Route::post('/addProduct', 'ProductsController@store')->middleware('admin');
 Route::get('/editProduct/{id}', 'ProductsController@edit')->middleware('admin');

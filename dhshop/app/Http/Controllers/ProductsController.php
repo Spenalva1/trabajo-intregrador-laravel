@@ -205,5 +205,33 @@ class ProductsController extends Controller
         $Products = Product::all();
         return view('products', compact('Products'));
     }
+    
+    public function search(Request $request) // listar productos para el cliente
+    {
+        $search = trim($request["search"]);
+        $Products = Product::where('name', 'like', '%' . $search . '%')->get(); //obtengo los productos que tengan la oracion buscada en el campo nombre
+        
+        
+        $mark = Mark::where('name', '=', $search)->get(); //obtengo las marcas que tengan el campo nombre igual al string buscado
+        if($mark->isNotEmpty()){ // verifico si se encontro una marca
+            foreach($mark[0]->products as $Product){ // recorro todos los productos asociados a esa marca
+                if($Products->where('id', $Product->id)->isEmpty()){ //en cada producto verifico que no hayan sido agregados anteriormente a la coleccion
+                    $Products->push($Product);
+                }
+            }
+        }
+        
+        $categories = Category::where('name', 'like', '%' . $search . '%')->get(); //obtengo las categorias que tengan la oracion buscada en el campo nombre
+        foreach($categories as $category){ // recorro las categorias
+            foreach($category->products as $Product){  // recorro todos los productos asociados a cada categoria
+                if($Products->where('id', $Product->id)->isEmpty()){ //en cada producto verifico que no hayan sido agregados anteriormente a la coleccion
+                    $Products->push($Product);
+                }
+            }
+        }
+
+        $quantity = $Products->count();
+        return view('products', compact('Products', 'search', 'quantity'));
+    }
 
 }
