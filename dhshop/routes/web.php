@@ -70,7 +70,7 @@ Route::get('/adminLogIn', 'AdminsController@logInForm')->middleware('adminLogged
 Route::post('/adminLogIn', 'AdminsController@logIn')->middleware('adminLogged');  
 Route::get('/adminLogOut', 'AdminsController@logOut')->middleware('admin');
 
-Route::get('/check', 'AdminsController@check');  
+Route::get('/adminSales', 'ReceiptsController@index');  
 
 Auth::routes();
 

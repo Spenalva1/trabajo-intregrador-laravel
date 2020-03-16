@@ -18,6 +18,9 @@
         <a class="list-group-item list-group-item-action" href="adminCustomers">
             Administración de Usuarios
         </a>
+        <a class="list-group-item list-group-item-action" href="adminSales">
+            Administración de ventas
+        </a>
     </div>
 
     <br>
